@@ -11,7 +11,7 @@ import java.net.Socket;
 
 import static Server.Utils.Constants.*;
 
-class ServerThread extends Thread{
+class ServerThread extends Thread {
     private static int waitingIt = 0;
     private TokenManager tokenManager;
     private Connection connection;

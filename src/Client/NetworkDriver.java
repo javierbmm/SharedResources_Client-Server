@@ -17,7 +17,16 @@ public class NetworkDriver {
     private static PrintWriter outputSocket;
 
     private static int waitingIt = 0;
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws Exception {
+        Type type;
+        if(args[0].length() == 0 || args[0].equals("readonly"))
+            type = Type.READONLY;
+        else if(args[0].equals("updater"))
+            type = Type.UPDATER;
+        else {
+            throw new Exception("Wrong argument. Please select type one ('readonly', 'updater' or leave it empty)");
+        }
+
         address = InetAddress.getLocalHost();
         socket = null;
         // From keyboard:
@@ -32,7 +41,7 @@ public class NetworkDriver {
         initIO();
         operator.setChannelOut(outputSocket)
                 .setChannelIn(inputSocket)
-                .setType(Type.UPDATER);
+                .setType(type);
 
         System.out.println("Client Address : " + address);
 
